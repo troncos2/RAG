@@ -258,4 +258,12 @@ run_query("Where do most hominids originate, and what evidence supports that?")
 # Off-topic test — should be rejected by guardrail
 run_query("How do dolphins evolve their echolocation?")
 
+# Dynamic questions
+while True:
+    print('Enter "exit" to exit the conversation' )
+    query = input("\nAsk a question about human evolution: ")
 
+    if query.lower() == "exit":
+        break
+
+    run_query(query)
