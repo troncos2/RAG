@@ -37,7 +37,7 @@ topic = "human evolution"
 for attempt in range(3):  # try up to 3 times
     try:
         #user agent so wikipedia doesn't block the request
-        docs = WikipediaLoader(query=topic, load_max_docs=5).load() # grading, adding more topics/guardrails, url where the data comes from (relevancy, accuracy, reliability)       
+        docs = WikipediaLoader(query=topic, load_max_docs=10).load() # grading, adding more topics/guardrails, url where the data comes from (relevancy, accuracy, reliability)       
         break  # success, exit the loop
     except Exception as e:
         print(f"Attempt {attempt + 1} failed: {e}")
@@ -73,7 +73,7 @@ print(f"\nStored {len(document_ids)} chunks in vector store.")
 @tool #(response_format="content_and_artifact")
 def retrieve_context(query: str):
     """Retrieve information Wikipedia articles about human evolution."""
-    retrieved_docs = vector_store.similarity_search(query, k=3)
+    retrieved_docs = vector_store.similarity_search(query, k=5)
 
     return "\n\n".join(
         (
@@ -159,8 +159,7 @@ def generate_query_or_respond(state: MessagesState):
         return {
             "messages": [AIMessage(content=(
                 "I'm only able to answer questions about human evolution, hominids, "
-                "and closely related topics. Your question appears to be outside that scope. "
-                "Please ask something related to human evolution!"
+                "and closely related topics. Please ask something related to human evolution."
             ))]
         }
 
@@ -258,3 +257,5 @@ run_query("Where do most hominids originate, and what evidence supports that?")
 
 # Off-topic test — should be rejected by guardrail
 run_query("How do dolphins evolve their echolocation?")
+
+
