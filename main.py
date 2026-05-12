@@ -19,7 +19,8 @@ from langchain_community.document_loaders import WikipediaLoader
 
 load_dotenv()   # reads the .env file
 
-
+# Set user agent explicitly
+os.environ["USER_AGENT"] = os.getenv("USER_AGENT", "RAGProject/1.0")
 
 model = init_chat_model("google_genai:gemini-2.5-flash-lite")
 
