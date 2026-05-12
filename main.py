@@ -13,8 +13,9 @@ from langchain_community.document_loaders import WebBaseLoader # loading documen
 from langchain_text_splitters import RecursiveCharacterTextSplitter # text splitter
 from langchain.tools import tool    # RAG agent's tool
 from langchain.agents import create_agent   # to actually create the agent using the tool
-# from langchain.agents.middleware import dynamic_prompt, ModelRequest #RAG chains
+from dotenv import load_dotenv  # .env file so I stop accidently doxxing myself lol
 
+load_dotenv()   # reads the .env file
 
 # Tracing (disabled when commented out)
 # os.environ["LANGSMITH_TRACING"] = "true" 
@@ -23,13 +24,13 @@ from langchain.agents import create_agent   # to actually create the agent using
 
 # Get the componenets
 # select chat model (Gemini)
-# os.environ["GOOGLE_API_KEY"] = "AIzaSyACgH-rvlWFm4VoHSCQuy_RW3xGM34Gss0"
+# os.environ["GOOGLE_API_KEY"] = "..."
 
 
 
 # select embeddings model
-if not os.environ.get("GOOGLE_API_KEY"):
-    os.environ["GOOGLE_API_KEY"] = getpass.getpass("Enter API key for Google Gemini: ")
+# if not os.environ.get("GOOGLE_API_KEY"):
+#     os.environ["GOOGLE_API_KEY"] = getpass.getpass("Enter API key for Google Gemini: ")
 
 model = init_chat_model("google_genai:gemini-2.5-flash-lite")
 
