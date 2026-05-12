@@ -3,25 +3,23 @@
 # Wikipedia RAG implementation
 
 # Set the environment to start logging traces in LogSmith
-import getpass
 import os
-os.environ["USER_AGENT"] = "RAGProject/1.0" # hardcoded user agent
-import bs4  # Loading documents
-import time # used for retrying access to wikipedia if access fails
-from langchain.chat_models import init_chat_model # chat model
-from langchain_google_genai import GoogleGenerativeAIEmbeddings   # Embeddings model
-from langchain_core.vectorstores import InMemoryVectorStore # Vector store model
-from langchain_community.document_loaders import WebBaseLoader # loading documents
-from langchain_text_splitters import RecursiveCharacterTextSplitter # text splitter
-from langchain.tools import tool    # RAG agent's tool
-from langchain.agents import create_agent   # to actually create the agent using the tool
-from dotenv import load_dotenv  # .env file so I stop accidently exposing my API keys lol
+import time
+import wikipedia 
+from dotenv import load_dotenv 
+
+load_dotenv()  
+my_user_agent = os.getenv("USER_AGENT")
+os.environ["USER_AGENT"] = my_user_agent
+wikipedia.set_user_agent(my_user_agent)
+
+from langchain.chat_models import init_chat_model 
+from langchain_google_genai import GoogleGenerativeAIEmbeddings 
+from langchain_core.vectorstores import InMemoryVectorStore 
+from langchain_text_splitters import RecursiveCharacterTextSplitter 
+from langchain.tools import tool 
+from langchain.agents import create_agent 
 from langchain_community.document_loaders import WikipediaLoader
-
-load_dotenv()   # reads the .env file
-
-# Set user agent explicitly
-# os.environ["USER_AGENT"] = os.getenv("USER_AGENT", "RAGProject/1.0")
 
 model = init_chat_model("google_genai:gemini-2.5-flash-lite")
 
