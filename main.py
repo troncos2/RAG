@@ -76,7 +76,11 @@ def retrieve_context(query: str):
     retrieved_docs = vector_store.similarity_search(query, k=3)
 
     return "\n\n".join(
-        f"Source: {doc.metadata.get('title', 'Unknown')}\nContent: {doc.page_content}"
+        (
+        f"Source: {doc.metadata.get('title', 'Unknown')} | "
+        f"URL: {doc.metadata.get('source', 'No URL available')}\n"
+        f"Content: {doc.page_content}"
+        )
         for doc in retrieved_docs
     )
 
