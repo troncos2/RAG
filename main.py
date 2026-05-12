@@ -5,6 +5,7 @@
 # Set the environment to start logging traces in LogSmith
 import getpass
 import os
+os.environ["USER_AGENT"] = "RAGProject/1.0" # hardcoded user agent
 import bs4  # Loading documents
 import time # used for retrying access to wikipedia if access fails
 from langchain.chat_models import init_chat_model # chat model
@@ -20,7 +21,7 @@ from langchain_community.document_loaders import WikipediaLoader
 load_dotenv()   # reads the .env file
 
 # Set user agent explicitly
-os.environ["USER_AGENT"] = os.getenv("USER_AGENT", "RAGProject/1.0")
+# os.environ["USER_AGENT"] = os.getenv("USER_AGENT", "RAGProject/1.0")
 
 model = init_chat_model("google_genai:gemini-2.5-flash-lite")
 
