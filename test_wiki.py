@@ -16,7 +16,7 @@ wikipedia.set_user_agent(my_agent)
 try:
     print("Attempting to contact Wikipedia...")
     results = wikipedia.search("human evolution")
-    print("\n✅ SUCCESS! Wikipedia allowed us in. Found articles:")
+    print("\nAccessed wiki. Found articles:")
     print(results)
 except Exception as e:
-    print(f"\n❌ FAILED: {e}")
+    print(f"\n Failed access: {e}")
