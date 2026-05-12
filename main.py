@@ -2,6 +2,3 @@
 
 # MPTL Blog RAG practice
 
-#
-# GEMINI API KEY: AIzaSyAJLSWXh407PibEOEcY5BklcwxFcE8P0nU
-#
